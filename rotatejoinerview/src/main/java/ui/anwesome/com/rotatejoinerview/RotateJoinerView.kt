@@ -68,4 +68,33 @@ class RotateJoinerView(ctx:Context):View(ctx) {
             }
         }
     }
+    data class RotateJoiner(var w:Float, var h:Float) {
+        val state = State()
+        fun draw(canvas: Canvas, paint: Paint) {
+            val size = 2*Math.min(w,h)/3
+            paint.color = Color.parseColor("#f44336")
+            paint.strokeWidth = Math.min(w, h) / 50
+            paint.strokeCap = Paint.Cap.ROUND
+            canvas.save()
+            canvas.translate(w/2, h/2)
+            for(i in 0..3) {
+                canvas.save()
+                canvas.rotate(i * 90f)
+                canvas.save()
+                val gap = (size/2) * state.scales[0]
+                canvas.translate(-gap, gap)
+                canvas.rotate(90f * state.scales[2])
+                canvas.drawLine(0f, 0f , 0f, size * state.scales[1], paint)
+                canvas.restore()
+                canvas.restore()
+            }
+            canvas.restore()
+        }
+        fun update(stopcb: (Float) -> Unit) {
+            state.update(stopcb)
+        }
+        fun startUpdating(startcb: () -> Unit) {
+            state.startUpdating(startcb)
+        }
+    }
 }
