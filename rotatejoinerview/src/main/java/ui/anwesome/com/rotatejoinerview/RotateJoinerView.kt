@@ -74,9 +74,6 @@ class RotateJoinerView(ctx:Context):View(ctx) {
         val state = State()
         fun draw(canvas: Canvas, paint: Paint) {
             val size = Math.min(w,h)/3
-            paint.color = Color.parseColor("#f44336")
-            paint.strokeWidth = Math.min(w, h) / 50
-            paint.strokeCap = Paint.Cap.ROUND
             canvas.save()
             canvas.translate(w/2, h/2)
             for(i in 0..3) {
@@ -110,6 +107,9 @@ class RotateJoinerView(ctx:Context):View(ctx) {
                 val w = canvas.width.toFloat()
                 val h = canvas.height.toFloat()
                 rotateJoiner = RotateJoiner(w, h)
+                paint.color = Color.parseColor("#f44336")
+                paint.strokeWidth = Math.min(w, h) / 50
+                paint.strokeCap = Paint.Cap.ROUND
             }
             canvas.drawColor(Color.parseColor("#212121"))
             rotateJoiner?.draw(canvas, paint)
