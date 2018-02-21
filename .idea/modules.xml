@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/KotlinRotateJoinerView.iml" filepath="$PROJECT_DIR$/KotlinRotateJoinerView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rotatejoinerview/rotatejoinerview.iml" filepath="$PROJECT_DIR$/rotatejoinerview/rotatejoinerview.iml" />
+    </modules>
+  </component>
+</project>
