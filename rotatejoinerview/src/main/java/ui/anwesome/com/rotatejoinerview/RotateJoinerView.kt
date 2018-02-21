@@ -51,7 +51,7 @@ class RotateJoinerView(ctx:Context):View(ctx) {
         fun update(stopcb:(Float) -> Unit) {
             scales[j] += 0.1f * dir
             if(Math.abs(scales[j] - prevScale) > 1) {
-                scales[j] += prevScale + dir
+                scales[j] = prevScale + dir
                 j += dir
                 if(j == scales.size || j == -1) {
                     dir = 0
@@ -84,9 +84,12 @@ class RotateJoinerView(ctx:Context):View(ctx) {
                 canvas.rotate(i * 90f)
                 canvas.save()
                 val gap = (size/2) * state.scales[0]
-                canvas.translate(-gap, gap)
+                canvas.translate(-gap, -gap)
+                canvas.drawCircle(0f,0f,size/10,paint)
+                canvas.save()
                 canvas.rotate(90f * state.scales[2])
-                canvas.drawLine(0f, 0f , 0f, size * state.scales[1], paint)
+                canvas.drawLine(0f, 0f , 0f, -size * state.scales[1], paint)
+                canvas.restore()
                 canvas.restore()
                 canvas.restore()
             }
