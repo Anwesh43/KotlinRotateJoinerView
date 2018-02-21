@@ -97,4 +97,29 @@ class RotateJoinerView(ctx:Context):View(ctx) {
             state.startUpdating(startcb)
         }
     }
+    data class Renderer(var view:RotateJoinerView, var time:Int = 0) {
+        val animator = Animator(view)
+        var rotateJoiner:RotateJoiner ?= null
+        fun render(canvas:Canvas, paint:Paint) {
+            if(time == 0) {
+                val w = canvas.width.toFloat()
+                val h = canvas.height.toFloat()
+                rotateJoiner = RotateJoiner(w, h)
+            }
+            canvas.drawColor(Color.parseColor("#212121"))
+            rotateJoiner?.draw(canvas, paint)
+            time++
+            animator.animate {
+                rotateJoiner?.update {
+                    animator.stop()
+                }
+            }
+
+        }
+        fun handleTap() {
+            rotateJoiner?.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
