@@ -44,4 +44,28 @@ class RotateJoinerView(ctx:Context):View(ctx) {
             }
         }
     }
+    data class State(var prevScale: Float = 0f, var dir:Int = 0, var j:Int = 0, var jDir:Int = 1) {
+        val scales:Array<Float> = arrayOf(0f, 0f, 0f)
+        fun update(stopcb:(Float) -> Unit) {
+            scales[j] += 0.1f * dir
+            if(Math.abs(scales[j] - prevScale) > 1) {
+                scales[j] += prevScale + dir
+                j += dir
+                if(j == scales.size || j == -1) {
+                    dir = 0
+                    jDir *= -1
+                    j += jDir
+                    prevScale = scales[j]
+                    stopcb(prevScale)
+
+                }
+            }
+        }
+        fun startUpdating(startcb: () -> Unit) {
+            if(dir == 0) {
+                dir = jDir
+                startcb()
+            }
+        }
+    }
 }
