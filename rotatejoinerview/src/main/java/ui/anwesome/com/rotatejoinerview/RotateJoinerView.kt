@@ -3,6 +3,7 @@ package ui.anwesome.com.rotatejoinerview
 /**
  * Created by anweshmishra on 21/02/18.
  */
+import android.app.Activity
 import android.content.*
 import android.graphics.*
 import android.view.*
@@ -71,7 +72,7 @@ class RotateJoinerView(ctx:Context):View(ctx) {
     data class RotateJoiner(var w:Float, var h:Float) {
         val state = State()
         fun draw(canvas: Canvas, paint: Paint) {
-            val size = 2*Math.min(w,h)/3
+            val size = Math.min(w,h)/3
             paint.color = Color.parseColor("#f44336")
             paint.strokeWidth = Math.min(w, h) / 50
             paint.strokeCap = Paint.Cap.ROUND
@@ -120,6 +121,13 @@ class RotateJoinerView(ctx:Context):View(ctx) {
             rotateJoiner?.startUpdating {
                 animator.start()
             }
+        }
+    }
+    companion object {
+        fun create(activity: Activity): RotateJoinerView {
+            val view = RotateJoinerView(activity)
+            activity.setContentView(view)
+            return view 
         }
     }
 }
